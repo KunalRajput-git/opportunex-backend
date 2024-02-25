@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const PORT = process.env.PORT || 4000;
 const ApiRoutes = require("./routes/index");
+const { PORT, CONNECTION_URL } = require("./constants");
+const mongoose = require("mongoose");
+const connectToDb = require("./db");
 require("dotenv").config();
 
 // new express app
@@ -13,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/api", ApiRoutes);
+
+connectToDb();
 
 app.listen(PORT, () => {
   console.log(`server listening on ${PORT}`);
