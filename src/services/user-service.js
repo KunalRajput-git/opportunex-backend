@@ -56,6 +56,15 @@ class UserService {
       throw error;
     }
   }
+  verifyToken(token) {
+    try {
+      const result = jwt.verify(token, JWT_KEY);
+      return result;
+    } catch (error) {
+      console.log("Something went wrong while validating token.");
+      throw new AuthenticationError(error.message);
+    }
+  }
 }
 
 module.exports = UserService;
