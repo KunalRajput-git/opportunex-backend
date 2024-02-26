@@ -5,11 +5,14 @@ const PORT = process.env.PORT || 4000;
 const JWT_EXPIRATION_TIME = "24h";
 const MAX_UNAUTHORIZED_PAGES = 1;
 const PAGE_SIZE = 5;
+const UNAUTH_COMPANIES_ACCESS_MSG =
+  "Discover more companies by creating an account or signing in.";
 
 module.exports = {
   PORT,
   CONNECTION_URL,
   JWT_EXPIRATION_TIME,
   MAX_UNAUTHORIZED_PAGES,
+  UNAUTH_COMPANIES_ACCESS_MSG,
   PAGE_SIZE,
 };
