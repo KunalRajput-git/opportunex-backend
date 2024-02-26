@@ -11,6 +11,11 @@ const companySchema = new mongoose.Schema({
   founder: String,
   founder_img_url: String,
   description: String,
+  type: {
+    type: String,
+    enum: ["mnc", "startup", "other"],
+    default: "other",
+  },
 });
 
 module.exports = mongoose.model("Company", companySchema);

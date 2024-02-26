@@ -7,7 +7,7 @@ const { extractToken } = require("../utils/index");
 
 const validatePageReq = (req, res, next) => {
   const error = new AuthenticationError(UNAUTH_COMPANIES_ACCESS_MSG);
-  const pageNumber = req.params.pageNo;
+  const pageNumber = req.query.pageno;
   let token = extractToken(req, res);
   if (token) req.token = token;
   if (MAX_UNAUTHORIZED_PAGES < pageNumber && !token) {

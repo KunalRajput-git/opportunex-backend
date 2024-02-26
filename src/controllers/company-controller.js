@@ -2,11 +2,12 @@ const { CompanyService } = require("../services/index");
 
 const companyService = new CompanyService();
 
-const getPage = async (req, res) => {
+const get = async (req, res) => {
   try {
-    const pageNumber = req.params.pageNo;
+    const pageno = req.query.pageno;
+    const type = req.query.type;
     const token = req.token;
-    const companies = await companyService.page(pageNumber, token);
+    const companies = await companyService.filterBy(token, type, pageno);
     return res.status(200).json({
       data: companies,
       success: true,
@@ -25,4 +26,4 @@ const getPage = async (req, res) => {
   }
 };
 
-module.exports = { getPage };
+module.exports = { get };

@@ -4,9 +4,8 @@ const { CompanyController } = require("../../controllers/index");
 const router = express.Router();
 
 router.get(
-  "/page/:pageNo",
+  "/filter",
   CompanyReqValidators.validatePageReq,
-  CompanyController.getPage
+  CompanyController.get
 );
-
 module.exports = router;
