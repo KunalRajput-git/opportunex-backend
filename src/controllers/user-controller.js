@@ -23,4 +23,21 @@ const signup = async (req, res) => {
   }
 };
 
-module.exports = { signup };
+const signin = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await userService.get(email, password);
+    return res.status(200).json({
+      success: user,
+      message: "successfully fetched user!",
+      error: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: { ...error, message: error.message },
+    });
+  }
+};
+
+module.exports = { signup, signin };
