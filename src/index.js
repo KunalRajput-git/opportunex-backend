@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use("/api", ApiRoutes);
+app.use("/opportunex/api", ApiRoutes);
 
 connectToDb();
 
