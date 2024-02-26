@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
       minlength: 8,
       trim: true,
     },
-    lastLogin: { type: Date, default: null },
+    lastLoginAt: { type: Date, default: null },
   },
   { timestamps: true }
 );

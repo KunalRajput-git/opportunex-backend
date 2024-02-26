@@ -28,7 +28,8 @@ const signin = async (req, res) => {
   try {
     const user = await userService.get(email, password);
     return res.status(200).json({
-      success: user,
+      success: true,
+      data: user,
       message: "successfully fetched user!",
       error: {},
     });

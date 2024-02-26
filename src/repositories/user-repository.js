@@ -23,7 +23,7 @@ class UserRepository {
   }
   async updatelastLogin(email, date) {
     try {
-      await User.updateOne({ email: email }, { lastLogin: date });
+      await User.updateOne({ email: email }, { lastLoginAt: date });
       return true;
     } catch (error) {
       console.log("Something went wrong inside user-repository layer");
