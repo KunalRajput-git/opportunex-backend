@@ -8,4 +8,10 @@ router.get(
   CompanyReqValidators.validatePageReq,
   CompanyController.get
 );
+
+router.get(
+  "/search",
+  CompanyReqValidators.validateSearchReq,
+  CompanyController.searchCompany
+);
 module.exports = router;

@@ -53,6 +53,16 @@ class CompanyService {
       throw error;
     }
   }
+
+  async getSearchedCompany(userId, search) {
+    try {
+      const companies = this.companyRepository.search(userId, search);
+      return companies;
+    } catch (error) {
+      console.log("something went wrong inside company-service:", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = CompanyService;

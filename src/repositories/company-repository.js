@@ -77,6 +77,22 @@ class CompanyRepository {
       throw error;
     }
   }
+
+  async search(userId, search) {
+    try {
+      const userWatchlist = await this.getUserWatchlist(userId);
+      console.log(userId)
+      console.log(userWatchlist)
+      const companies = await Company.find({
+        _id: { $nin: userWatchlist },
+        name: { $regex: search, $options: "i" },
+      });
+      return companies;
+    } catch (error) {
+      console.log("Something went wrong inside company-repository:", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = CompanyRepository;

@@ -25,4 +25,30 @@ const get = async (req, res) => {
   }
 };
 
-module.exports = { get };
+const searchCompany = async (req, res) => {
+  try {
+    const { userId, companyname } = req.query;
+    console.log(req.query)
+    const companies = await companyService.getSearchedCompany(
+      userId,
+      companyname
+    );
+    return res.status(200).json({
+      data: companies,
+      success: true,
+      message: "Successfully fetched companies",
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      error: {
+        ...error,
+        message: error.message,
+      },
+    });
+  }
+};
+
+module.exports = { get, searchCompany };

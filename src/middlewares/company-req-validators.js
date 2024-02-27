@@ -5,8 +5,9 @@ const {
 const { AuthenticationError } = require("../utils/errors");
 const { extractToken } = require("../utils/index");
 
+const error = new AuthenticationError(UNAUTH_COMPANIES_ACCESS_MSG);
+
 const validatePageReq = (req, res, next) => {
-  const error = new AuthenticationError(UNAUTH_COMPANIES_ACCESS_MSG);
   const pageNumber = req.query.pageno;
   let token = extractToken(req, res);
   if (token) req.token = token;
@@ -22,4 +23,18 @@ const validatePageReq = (req, res, next) => {
   next();
 };
 
-module.exports = { validatePageReq };
+const validateSearchReq = (req, res, next) => {
+  let token = extractToken(req, res);
+  if (!token) {
+    return res.status(400).json({
+      success: false,
+      error: {
+        ...error,
+        message: error.message,
+      },
+    });
+  }
+  next();
+};
+
+module.exports = { validatePageReq, validateSearchReq };
