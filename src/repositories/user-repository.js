@@ -30,6 +30,17 @@ class UserRepository {
       throw error;
     }
   }
+  async addToWatchlist(userId, companyId) {
+    try {
+      await User.findByIdAndUpdate(userId, {
+        $addToSet: { watchlist: companyId },
+      });
+      return true;
+    } catch (error) {
+      console.log("Something went wrong inside user-repository layer");
+      throw error;
+    }
+  }
 }
 
 module.exports = UserRepository;

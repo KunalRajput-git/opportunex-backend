@@ -41,6 +41,14 @@ class UserService {
     }
   }
 
+  async addCompanyToWatchlist(userId, companyId) {
+    try {
+      await this.userRepository.addToWatchlist(userId, companyId);
+    } catch (error) {
+      console.log("something went wrong inside User-service:", error);
+      throw error;
+    }
+  }
   async checkPassword(plainPassword, ecnryptedPassword) {
     return bcrypt.compareSync(plainPassword, ecnryptedPassword);
   }

@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.post("/signup", UserController.signup);
 router.post("/signin", UserController.signin);
+router.patch("/watchlist", UserController.addToWatchlist);
 
 module.exports = router;

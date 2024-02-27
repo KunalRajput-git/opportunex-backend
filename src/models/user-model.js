@@ -27,6 +27,13 @@ const userSchema = new mongoose.Schema(
       minlength: 8,
       trim: true,
     },
+    watchlist: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Company",
+        unique: true,
+      },
+    ],
     lastLoginAt: { type: Date, default: null },
   },
   { timestamps: true }
