@@ -4,10 +4,9 @@ const companyService = new CompanyService();
 
 const get = async (req, res) => {
   try {
-    const pageno = req.query.pageno;
-    const type = req.query.type;
+    const { userId, pageno, type } = req.query;
     const token = req.token;
-    const companies = await companyService.filterBy(token, type, pageno);
+    const companies = await companyService.filter(userId, token, type, pageno);
     return res.status(200).json({
       data: companies,
       success: true,

@@ -8,20 +8,48 @@ class CompanyService {
     this.userService = new UserService();
   }
 
-  async filterBy(token, type, pageno) {
+  async filter(userId, token, type, pageno) {
     try {
       if (token) {
         this.userService.verifyToken(token);
       }
       const offset = (pageno - 1) * PAGE_SIZE;
-      const companies = await this.companyRepository.filter(
-        type,
-        offset,
-        PAGE_SIZE
-      );
-      return companies;
+      switch (type) {
+        case "all":
+          if (token && userId) {
+            return await this.companyRepository.getAllExludingWatchlist(
+              userId,
+              offset,
+              PAGE_SIZE
+            );
+          } else {
+            return await this.companyRepository.getAllComapnies(
+              offset,
+              PAGE_SIZE
+            );
+          }
+        case "my watchlist":
+          if (userId) {
+            return await this.companyRepository.getWatchlistCompanies(
+              userId,
+              offset,
+              PAGE_SIZE
+            );
+          }
+          break;
+        default:
+          if (userId) {
+            return await this.companyRepository.filterByTypeExludingWatchlist(
+              userId,
+              type,
+              offset,
+              PAGE_SIZE
+            );
+          }
+          break;
+      }
     } catch (error) {
-      console.log("something went wrong inside service-repository");
+      console.log("something went wrong inside company-service:", error);
       throw error;
     }
   }
