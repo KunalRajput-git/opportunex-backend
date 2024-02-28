@@ -58,4 +58,21 @@ const addToWatchlist = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin, addToWatchlist };
+const removeFromWatchlist = async (req, res) => {
+  const { userId, companyId } = req.body;
+  try {
+    await userService.removeCompanyFromWatchlist(userId, companyId);
+    return res.status(201).json({
+      success: true,
+      message: "successfully added!",
+      error: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: { ...error, message: error.message },
+    });
+  }
+};
+
+module.exports = { signup, signin, addToWatchlist, removeFromWatchlist };

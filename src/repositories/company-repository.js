@@ -52,7 +52,6 @@ class CompanyRepository {
   async getWatchlistCompanies(userId, offset, pageSize) {
     try {
       const userWatchlist = await this.getUserWatchlist(userId);
-      console.log(userWatchlist);
       const companies = await Company.find({ _id: { $in: userWatchlist } })
         .skip(offset)
         .limit(pageSize);
@@ -81,8 +80,6 @@ class CompanyRepository {
   async search(userId, search) {
     try {
       const userWatchlist = await this.getUserWatchlist(userId);
-      console.log(userId)
-      console.log(userWatchlist)
       const companies = await Company.find({
         _id: { $nin: userWatchlist },
         name: { $regex: search, $options: "i" },

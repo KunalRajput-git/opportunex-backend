@@ -41,6 +41,18 @@ class UserRepository {
       throw error;
     }
   }
+
+  async removeFromWatchlist(userId, companyId) {
+    try {
+      await User.findByIdAndUpdate(userId, {
+        $pull: { watchlist: companyId },
+      });
+      return true;
+    } catch (error) {
+      console.log("Something went wrong inside user-repository layer");
+      throw error;
+    }
+  }
 }
 
 module.exports = UserRepository;

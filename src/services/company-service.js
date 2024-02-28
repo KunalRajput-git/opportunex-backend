@@ -28,7 +28,7 @@ class CompanyService {
               PAGE_SIZE
             );
           }
-        case "my watchlist":
+        case "watchlist":
           if (userId) {
             return await this.companyRepository.getWatchlistCompanies(
               userId,

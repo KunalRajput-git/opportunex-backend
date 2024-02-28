@@ -28,7 +28,6 @@ const get = async (req, res) => {
 const searchCompany = async (req, res) => {
   try {
     const { userId, companyname } = req.query;
-    console.log(req.query)
     const companies = await companyService.getSearchedCompany(
       userId,
       companyname

@@ -13,6 +13,9 @@ class UserService {
     try {
       await this.userRepository.save(user);
     } catch (error) {
+      if(error.code===11000 && error.keyValue.email){
+        throw new AuthenticationError("this email is already exist.")
+      }
       console.log("something went wrong inside User-service:", error);
       throw error;
     }
@@ -20,7 +23,7 @@ class UserService {
 
   async get(email, plainPassword) {
     try {
-      const user = (await this.userRepository.getByEmail(email)).toObject();
+      const user = (await this.userRepository.getByEmail(email))?.toObject();
       if (user) {
         const isPasswordMatched = await this.checkPassword(
           plainPassword,
@@ -33,7 +36,7 @@ class UserService {
         delete user.password;
         await this.userRepository.updatelastLogin(email, new Date());
         return user;
-      } else throw new AuthenticationError("email not exist!");
+      } else throw new AuthenticationError("this email not exist!");
     } catch (error) {
       console.log(error.message);
       console.log("Something went wrong inside user-service layer");
@@ -49,6 +52,16 @@ class UserService {
       throw error;
     }
   }
+
+  async removeCompanyFromWatchlist(userId, companyId) {
+    try {
+      await this.userRepository.removeFromWatchlist(userId, companyId);
+    } catch (error) {
+      console.log("something went wrong inside User-service:", error);
+      throw error;
+    }
+  }
+
   async checkPassword(plainPassword, ecnryptedPassword) {
     return bcrypt.compareSync(plainPassword, ecnryptedPassword);
   }
