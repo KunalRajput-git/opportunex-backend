@@ -1,6 +1,7 @@
 const express = require("express");
 const CompanyReqValidators = require("../../middlewares/company-req-validators");
 const { CompanyController } = require("../../controllers/index");
+const { AuthReqValidators } = require("../../middlewares");
 const router = express.Router();
 
 router.get(
@@ -11,7 +12,7 @@ router.get(
 
 router.get(
   "/search",
-  CompanyReqValidators.validateSearchReq,
+  AuthReqValidators.validateAuthReq,
   CompanyController.searchCompany
 );
 module.exports = router;

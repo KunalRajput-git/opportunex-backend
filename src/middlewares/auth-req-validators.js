@@ -3,7 +3,7 @@ const { extractToken } = require("../utils");
 
 const userService = new UserService();
 
-const validateWatchlistReq = (req, res, next) => {
+const validateAuthReq = (req, res, next) => {
   try {
     let token = extractToken(req, res);
     userService.verifyToken(token);
@@ -19,4 +19,4 @@ const validateWatchlistReq = (req, res, next) => {
   }
 };
 
-module.exports = { validateWatchlistReq };
+module.exports = { validateAuthReq };

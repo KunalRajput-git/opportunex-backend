@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const applicationSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  company_name: String,
   role: {
     type: String,
     required: true,
@@ -13,7 +19,7 @@ const applicationSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["applied", "interviewing", "selected", "rejected", "declined"],
+    enum: ["applied", "interviewing", "pending","selected", "rejected", "declined"],
   },
   note: String,
 });

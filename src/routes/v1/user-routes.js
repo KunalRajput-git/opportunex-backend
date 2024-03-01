@@ -8,12 +8,12 @@ router.post("/signup", UserController.signup);
 router.post("/signin", UserController.signin);
 router.patch(
   "/watchlist/add",
-  AuthReqValidators.validateWatchlistReq,
+  AuthReqValidators.validateAuthReq,
   UserController.addToWatchlist
 );
 router.patch(
   "/watchlist/remove",
-  AuthReqValidators.validateWatchlistReq,
+  AuthReqValidators.validateAuthReq,
   UserController.removeFromWatchlist
 );
 

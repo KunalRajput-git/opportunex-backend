@@ -13,8 +13,8 @@ class UserService {
     try {
       await this.userRepository.save(user);
     } catch (error) {
-      if(error.code===11000 && error.keyValue.email){
-        throw new AuthenticationError("this email is already exist.")
+      if (error.code === 11000 && error.keyValue.email) {
+        throw new AuthenticationError("this email is already exist.");
       }
       console.log("something went wrong inside User-service:", error);
       throw error;
