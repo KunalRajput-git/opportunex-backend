@@ -3,6 +3,7 @@ const cors = require("cors");
 const ApiRoutes = require("./routes/index");
 const { PORT, CONNECTION_URL } = require("./constants");
 const mongoose = require("mongoose");
+const selfPing = require("./utils/selfping");
 const connectToDb = require("./db");
 require("dotenv").config();
 
