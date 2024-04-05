@@ -7,6 +7,7 @@ const MAX_UNAUTHORIZED_PAGES = 1;
 const PAGE_SIZE = 5;
 const UNAUTH_COMPANIES_ACCESS_MSG =
   "Discover more companies by creating an account or signing in.";
+export const ONRENDER_ENDPOINT = "https://opportunex-backend.onrender.com";
 
 module.exports = {
   PORT,
@@ -15,4 +16,5 @@ module.exports = {
   MAX_UNAUTHORIZED_PAGES,
   UNAUTH_COMPANIES_ACCESS_MSG,
   PAGE_SIZE,
+  ONRENDER_ENDPOINT,
 };
